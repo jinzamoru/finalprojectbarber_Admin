@@ -144,7 +144,7 @@ class _AppointmentCardState extends State<AppointmentCard> {
                     final custId =
                         Provider.of<DataManagerProvider>(context, listen: false)
                             .currentUser
-                            .customerId;
+                            .AdminId;
                     AppointmentModel model = AppointmentModel(
                         customerId: custId,
                         barberId: widget.barberId,

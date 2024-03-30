@@ -94,7 +94,7 @@ class _TimePickerState extends State<TimePicker> {
               'Day: ${DateFormat('yyyy-MM-dd   HH:mm:ss').format(_startTime.toLocal())}',
               style: TextStyle(fontSize: 20),
             ),
-            SizedBox(height: 40),
+            const SizedBox(height: 40),
             Text(
               'Start Time: ${DateFormat('HH:mm').format(_startTime)}',
               style: TextStyle(fontSize: 20),

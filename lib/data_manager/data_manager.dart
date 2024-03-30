@@ -5,21 +5,25 @@ import 'package:flutter/cupertino.dart';
 import '../model/appointment_model.dart';
 import '../model/barber_model.dart';
 import '../model/data.dart';
+import '../model/hair_model.dart';
 import '../model/user_model.dart';
 
 class DataManagerProvider extends ChangeNotifier {
   bool isLoading = false;
 
-  late List<BarberModel> allBarbers;
-  late List<BarberModel> topBarbers;
+  late List<HairModel> allhairs = [];
+  late List<AdminInfo> alladmins = [];
+ late List<BarberInfo> allbarbers = [];
 
-  List<BarberModel> searchList = [];
-
+  List<HairModel> searchListhairs = [];
+  List<AdminInfo> searchListAdmins = [];
+  List<BarberInfo> searchListBarbers = [];
+  
   late BarberInfo barberInfo;
 
   late BarberModel barberCompleteData;
 
-  late CustomerInfo customerProfile;
+  late AdminInfo adminProfile;
 
   late BarberModel barberProfile;
 
@@ -38,12 +42,12 @@ class DataManagerProvider extends ChangeNotifier {
 
   bool get loading => isLoading;
 
-  void setCustomerProfile(CustomerInfo user) {
-    customerProfile = user;
+  void setAdminProfile(AdminInfo user) {
+    adminProfile = user;
     notifyListeners();
   }
 
-  CustomerInfo get currentUser => customerProfile;
+  AdminInfo get currentUser => adminProfile;
 
   void setBarberProfile(BarberModel user) {
     print('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
@@ -53,36 +57,70 @@ class DataManagerProvider extends ChangeNotifier {
 
   BarberModel get getBarberProfile => barberProfile;
 
-  void setAllBarbers(List<BarberModel> barberMapList) {
-    allBarbers = barberMapList;
+  void setAllHairs(List<HairModel> hairMapList) {
+    allhairs = hairMapList;
     notifyListeners();
   }
 
-  List<BarberModel> get getAllBarbers => allBarbers;
-
-  void setTopBarbers(List<BarberModel> barberTopList) {
-    topBarbers = barberTopList;
+   void setAllAdmin(List<AdminInfo> adminMapList) {
+    alladmins = adminMapList;
+    notifyListeners();
+  }
+  void setAllbarber(List<BarberInfo> barberMapList) {
+    allbarbers = barberMapList;
     notifyListeners();
   }
 
-  List<BarberModel> get getTopBarbers => topBarbers;
-
-  void getSearch(String searchKey) {
-    allBarbers.forEach((element) {
-      if (element.shopName.toLowerCase().startsWith(searchKey.toLowerCase()) ||
-          element.shopName.startsWith(searchKey.toLowerCase())) {
-        searchResult(element);
+  List<HairModel> get getAllHairs => allhairs;
+  List<AdminInfo> get getAllAdmin => alladmins;
+ List<BarberInfo> get getAllBarber => allbarbers;
+ 
+  void getSearchHair(String searchKey) {
+    allhairs.forEach((element) {
+      if (element.hairName.toLowerCase().startsWith(searchKey.toLowerCase()) ||
+          element.hairName.startsWith(searchKey.toLowerCase())) {
+        searchResultHair(element);
       }
     });
   }
 
-  void searchResult(BarberModel barberModel) {
-    searchList.add(barberModel);
+ void getSearchBarber(String searchKey) {
+    allbarbers.forEach((element) {
+      if (element.barberFirstName.toLowerCase()
+              .startsWith(searchKey.toLowerCase()) ||
+          element.barberFirstName.startsWith(searchKey.toLowerCase())) {
+        searchResultBarber(element);
+      }
+    });
+  }
+  void getSearchAdmin(String searchKey) {
+    alladmins.forEach((element) {
+      if (element.AdminFirstName.toLowerCase()
+              .startsWith(searchKey.toLowerCase()) ||
+          element.AdminFirstName.startsWith(searchKey.toLowerCase())) {
+        searchResultAdmin(element);
+      }
+    });
+  }
+
+  void searchResultHair(HairModel hairModel) {
+    searchListhairs.add(hairModel);
     notifyListeners();
   }
 
-  List<BarberModel> get getSearchList => searchList;
+  void searchResultAdmin(AdminInfo admin) {
+    searchListAdmins.add(admin);
+    notifyListeners();
+  }
 
+  void searchResultBarber(BarberInfo barber) {
+    searchListBarbers.add(barber);
+    notifyListeners();
+  }
+
+  List<HairModel> get getSearchListhair => searchListhairs;
+  List<AdminInfo> get getSearchListadmin => searchListAdmins;
+  List<BarberInfo> get getSearchListbarber => searchListBarbers;
   void setIsSearching(bool value) {
     isSearching = value;
     notifyListeners();
@@ -90,17 +128,17 @@ class DataManagerProvider extends ChangeNotifier {
 
   bool get searchingStart => isSearching;
 
-  void setBarberBasicInformation(
-      String id, String name, String email, String contact) {
-    barberInfo = BarberInfo(
-        barberId: id,
-        barberFullName: name,
-        barberEmail: email,
-        barberContact: contact,
-        roll: 'Barber',
-        barberPassword: '');
-    notifyListeners();
-  }
+  // void setBarberBasicInformation(
+  //     String id, String name, String email, String contact) {
+  //   barberInfo = BarberInfo(
+  //       barberId: id,
+  //       barberFullName: name,
+  //       barberEmail: email,
+  //       barberContact: contact,
+  //       roll: 'Barber',
+  //       barberPassword: '');
+  //   notifyListeners();
+  // }
 
   void setBarberShopInfo(
       String shopName,

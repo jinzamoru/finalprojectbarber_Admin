@@ -46,7 +46,7 @@ class _AppointmentCardState extends State<BarberTimeLine> {
                   child: ListView.builder(
                       itemCount: widget.seats,
                       shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
                         bool booked = false;
 
@@ -127,7 +127,7 @@ class _AppointmentCardState extends State<BarberTimeLine> {
                   },
                   child: Text(
                     isBooked ? 'Cancel' : 'Waiting',
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                   ),
                 ),
               )

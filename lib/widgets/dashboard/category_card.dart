@@ -1,15 +1,14 @@
+import 'package:finalprojectbarber/model/hair_model.dart';
 import 'package:finalprojectbarber/theme/extention.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:smooth_star_rating_null_safety/smooth_star_rating_null_safety.dart';
-import '../../model/barber_model.dart';
-import '../../screen/details_screen.dart';
+import '../../screen/hair_details_screen.dart';
 import '../../theme/text_styles.dart';
 import '../../theme/theme.dart';
 
 Widget categoryCardWidget(
   BuildContext context,
-  BarberModel barberModel, {
+  HairModel hairModel, {
   required Color color,
   required Color lightColor,
 }) {
@@ -43,40 +42,23 @@ Widget categoryCardWidget(
         child: ClipRRect(
           borderRadius: const BorderRadius.all(Radius.circular(20)),
           child: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: NetworkImage(barberModel.image), fit: BoxFit.cover),
-            ),
+            // decoration: BoxDecoration(
+            //   image: DecorationImage(
+            //       image: NetworkImage(hairModel.image), fit: BoxFit.cover),
+            // ),
             child: Container(
               color: Colors.black38,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
                   Flexible(
-                    child: Text(barberModel.shopName, style: titleStyle).hP8,
+                    child: Text(hairModel.hairName, style: titleStyle).hP8,
                   ),
                   const SizedBox(
                     height: 10.0,
                   ),
-                  SmoothStarRating(
-                      onRatingChanged: (v) {},
-                      starCount: 5,
-                      rating: barberModel.rating,
-                      size: 20.0,
-                      filledIconData: Icons.star,
-                      halfFilledIconData: Icons.star,
-                      color: Colors.yellow,
-                      borderColor: Colors.yellow,
-                      spacing: 0.0),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Flexible(
-                    child: Text(
-                      '${num.parse('${barberModel.goodReviews}')} Reviews',
-                      style: subtitleStyle,
-                    ).hP8,
-                  ),
+               
+             
                 ],
               ).p16,
             ),
@@ -88,7 +70,7 @@ Widget categoryCardWidget(
         Navigator.push(
             context,
             CupertinoPageRoute(
-                builder: (context) => DetailScreen(model: barberModel)));
+                builder: (context) => HairDetailScreen(model: hairModel)));
       },
     ),
   );

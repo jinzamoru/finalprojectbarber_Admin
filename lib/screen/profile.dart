@@ -51,9 +51,8 @@ class _UserProfileState extends State<UserProfile> {
       }
     } catch (error) {
       print('Error uploading image: $error');
-    } 
+    }
   }
-  
 
   @override
   void initState() {
@@ -70,40 +69,39 @@ class _UserProfileState extends State<UserProfile> {
     // เรียกเมธอดเพื่อดึงข้อมูลโปรไฟล์ผู้ใช้
   }
 
- Future<void> fetchUserProfile() async {
-  // URL API ที่ต้องการเรียก (แทนที่ด้วย URL ของ API จริง)
-  final url = Uri.parse('http://127.0.0.1/user/showprofile.php');
-  final userProvider = Provider.of<UserProvider>(context, listen: false);
-  try {
-    final response = await http.post(
-      url,
-      body: {'user_id': userProvider.getUserId()},
-    );
+  Future<void> fetchUserProfile() async {
+    // URL API ที่ต้องการเรียก (แทนที่ด้วย URL ของ API จริง)
+    final url = Uri.parse('http://127.0.0.1/user/showprofile.php');
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    try {
+      final response = await http.post(
+        url,
+        body: {'user_id': userProvider.getUserId()},
+      );
 
-    if (response.statusCode == 200) {
-      final Map<String, dynamic> data = json.decode(response.body);
-      final Map<String, dynamic> userData = data['data'];
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = json.decode(response.body);
+        final Map<String, dynamic> userData = data['data'];
 
-      // Use null-aware operators to handle null values
-      String _name = userData['user_name'] ?? '';
-      String _lastName = userData['user_lastname'] ?? '';
-      String _phone = userData['user_phone'] ?? '';
-      String _email = userData['user_email'] ?? '';
+        // Use null-aware operators to handle null values
+        String _name = userData['user_name'] ?? '';
+        String _lastName = userData['user_lastname'] ?? '';
+        String _phone = userData['user_phone'] ?? '';
+        String _email = userData['user_email'] ?? '';
 
-      setState(() {
-        name = _name;
-        lastName = _lastName;
-        phone = _phone;
-        email = _email;
-      });
-    } else {
-      print('Unexpected data format');
+        setState(() {
+          name = _name;
+          lastName = _lastName;
+          phone = _phone;
+          email = _email;
+        });
+      } else {
+        print('Unexpected data format');
+      }
+    } catch (error) {
+      print('Error loading user profile: $error');
     }
-  } catch (error) {
-    print('Error loading user profile: $error');
   }
-}
-
 
   void _logout(BuildContext context) {
     Navigator.pushReplacementNamed(context, '/login');
@@ -133,14 +131,12 @@ class _UserProfileState extends State<UserProfile> {
     );
   }
 
-  
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(20),
-         child: ListView(
+        child: ListView(
           children: [
             // รูปโปรไฟล์
             const SizedBox(height: 40),
@@ -161,16 +157,14 @@ class _UserProfileState extends State<UserProfile> {
 
             // ข้อมูล
             const SizedBox(height: 20),
-            itemProfile('Name', name , Icons.person),
+            itemProfile('Name', name, Icons.person),
             const SizedBox(height: 10),
-            itemProfile(
-                'LastName', lastName, Icons.person),
+            itemProfile('LastName', lastName, Icons.person),
             const SizedBox(height: 10),
             itemProfile('Phone', phone, Icons.phone),
             const SizedBox(height: 10),
-            itemProfile('Email', email , Icons.mail),
+            itemProfile('Email', email, Icons.mail),
             const SizedBox(
-            
               height: 20,
             ),
 
@@ -199,7 +193,8 @@ class _UserProfileState extends State<UserProfile> {
                           height: 150,
                         )
                       : Container(
-                          height: 150,
+                          height: 200,
+                          width: 325,
                           color: Colors.grey[200],
                           child: Icon(Icons.image, size: 50),
                         ),

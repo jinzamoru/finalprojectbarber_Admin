@@ -1,14 +1,14 @@
-import 'package:finalprojectbarber/model/barber_model.dart';
+import 'package:finalprojectbarber/model/hair_model.dart';
 import 'package:finalprojectbarber/theme/extention.dart';
 import 'package:finalprojectbarber/widgets/random_color.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../php_data/php_data.dart';
-import '../screen/barber_details_screen.dart';
+import '../screen/hair_details_screen.dart';
 import '../theme/light_color.dart';
 import '../theme/text_styles.dart';
 
-Widget barberTile(BarberInfo model, BuildContext context) {
+Widget hairTile(HairModel model, BuildContext context) {
   return Container(
     margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
     decoration: BoxDecoration(
@@ -49,7 +49,7 @@ Widget barberTile(BarberInfo model, BuildContext context) {
                 ),
               ),
               title: Text(
-                "${model.barberFirstName} ${model.barberLastName}",
+                model.hairName,
                 style: TextStyles.title.bold
                     .copyWith(color: Colors.black, fontSize: 16.0),
               ),
@@ -59,13 +59,7 @@ Widget barberTile(BarberInfo model, BuildContext context) {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        model.barberEmail,
-                        style: TextStyles.bodySm.subTitleColor.bold
-                            .copyWith(fontSize: 12.0),
-                      ),
-                      const SizedBox(height: 4.0),
-                      Text(
-                        model.barberPhone,
+                        "ราคา " + model.hairPrice.toString() + " บาท",
                         style: TextStyles.bodySm.subTitleColor.bold
                             .copyWith(fontSize: 12.0),
                       ),
@@ -77,7 +71,7 @@ Widget barberTile(BarberInfo model, BuildContext context) {
             ),
           ),
           IconButton(
-            icon: const Icon(
+            icon: Icon(
               Icons.edit,
               size: 30,
               color: Colors.blue,
@@ -86,13 +80,13 @@ Widget barberTile(BarberInfo model, BuildContext context) {
               Navigator.push(
                 context,
                 CupertinoPageRoute(
-                  builder: (context) => BarberDetailScreen(model: model),
+                  builder: (context) => HairDetailScreen(model: model),
                 ),
               );
             },
           ),
           IconButton(
-            icon: const Icon(
+            icon: Icon(
               Icons.delete,
               size: 30,
               color: Colors.red,
@@ -102,18 +96,18 @@ Widget barberTile(BarberInfo model, BuildContext context) {
                 context: context,
                 builder: (BuildContext context) {
                   return AlertDialog(
-                    title: const Text('ลบข้อมูล'),
-                    content: const Text('ต้องการลบข้อมูลนี้หรือไม่?'),
+                    title: Text('ลบข้อมูล'),
+                    content: Text('ต้องการลบข้อมูลนี้หรือไม่?'),
                     actions: [
                       TextButton(
                         onPressed: () => Navigator.pop(context),
-                        child: const Text('ยกเลิก'),
+                        child: Text('ยกเลิก'),
                       ),
                       TextButton(
                         onPressed: () {
-                          deleteBarber(model.barberId , model.barberCertificate , context);
+                          deleteHair(model.hairId, context);                  
                         },
-                        child: const Text('ลบ'),
+                        child: Text('ลบ'),
                       ),
                     ],
                   );

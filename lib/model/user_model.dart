@@ -1,16 +1,15 @@
-class CustomerInfo {
-  final String customerId;
-  final String customerFullName;
-  final String customerEmail;
-  final String customerContact;
-  final String customerPassword;
-  final String roll;
+class AdminInfo {
+  final String AdminId;
+  final String AdminFirstName;
+  final String AdminLastName;
+  final String AdminEmail;
+  final String AdminPassword;
 
-  CustomerInfo(
-      {required this.customerId,
-     required this.customerPassword,
-      required this.customerFullName,
-      required this.customerEmail,
-      required this.customerContact,
-      required this.roll});
+
+  AdminInfo(
+      {required this.AdminId,
+     required this.AdminPassword,
+      required this.AdminFirstName,
+      required this.AdminLastName,
+      required this.AdminEmail});
 }

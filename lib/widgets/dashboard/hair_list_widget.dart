@@ -1,16 +1,15 @@
+import 'package:finalprojectbarber/model/hair_model.dart';
 import 'package:finalprojectbarber/theme/extention.dart';
-import 'package:finalprojectbarber/widgets/barber_tile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../model/barber_model.dart';
+import '../hair_tile.dart';
 
-
-Widget BarberList(List<BarberInfo> barber, BuildContext context) {
+Widget hairsList(List<HairModel> hair, BuildContext context) {
   return SliverList(
     delegate: SliverChildListDelegate(
       [
-        const Row(
+        Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             // Text("", style: TextStyles.title.bold),
@@ -28,16 +27,16 @@ Widget BarberList(List<BarberInfo> barber, BuildContext context) {
             // .p(12).ripple(() {}, borderRadius: BorderRadius.all(Radius.circular(20))),
           ],
         ).hP16,
-        getbarberWidgetList(barber, context)
+        gethairWidgetList(hair, context)
       ],
     ),
   );
 }
 
-Widget getbarberWidgetList(
-    List<BarberInfo> barberDataList, BuildContext context) {
+Widget gethairWidgetList(
+    List<HairModel> hairDataList, BuildContext context) {
   return Column(
-      children: barberDataList.map((x) {
-    return barberTile(x, context);
+      children: hairDataList.map((x) {
+    return hairTile(x, context);
   }).toList());
 }

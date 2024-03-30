@@ -1,5 +1,4 @@
 import 'dart:math';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 
 import '../theme/light_color.dart';
@@ -11,8 +10,9 @@ class ProgressWidget extends StatefulWidget {
   final Color activeColor;
   final Color backgroundColor;
   final String title;
+  // ignore: prefer_typing_uninitialized_variables
   final durationTime;
-  ProgressWidget({
+  const ProgressWidget({
     Key? key,
     required this.value,
     this.totalValue = 100,

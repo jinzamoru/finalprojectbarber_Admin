@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+// ignore: must_be_immutable
 class PickedUpLocation extends StatelessWidget {
   PickedUpLocation({Key? key, required this.latitude, required this.longitude})
       : super(key: key);

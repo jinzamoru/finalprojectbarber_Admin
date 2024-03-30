@@ -16,7 +16,6 @@ class BarberDashboard extends StatefulWidget {
 }
 
 class _BarberDashboardState extends State<BarberDashboard> {
-  final _advancedDrawerController1 = AdvancedDrawerController();
 
   DateTime now = DateTime.now();
   late DateTime startTime;

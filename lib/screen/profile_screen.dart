@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import '../data_manager/data_manager.dart';
 import '../widgets/logout.dart';
 
-
 class UserProfileScreen extends StatelessWidget {
   const UserProfileScreen({Key? key}) : super(key: key);
 
@@ -16,10 +15,11 @@ class UserProfileScreen extends StatelessWidget {
           return Container(
             child: Stack(
               children: [
-                 SafeArea(child: Padding(
+                SafeArea(
+                    child: Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: InkWell(
-                      onTap: (){
+                      onTap: () {
                         Navigator.pop(context);
                       },
                       child: const Icon(Icons.arrow_back)),
@@ -36,38 +36,47 @@ class UserProfileScreen extends StatelessWidget {
                       const SizedBox(
                         height: 8.0,
                       ),
-                      Text(provider.customerProfile.customerFullName,style: const TextStyle(
-                        fontWeight: FontWeight.w800,
-                        fontSize: 20.0,
-                      ),),
+                      Text(
+                        provider.adminProfile.AdminFirstName,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w800,
+                          fontSize: 20.0,
+                        ),
+                      ),
                       const SizedBox(
                         height: 8.0,
                       ),
-                      Text(provider.customerProfile.customerEmail,style: const TextStyle(
-                        fontSize: 18.0,
-                      ),),
+                      Text(
+                        provider.adminProfile.AdminEmail,
+                        style: const TextStyle(
+                          fontSize: 18.0,
+                        ),
+                      ),
                       const SizedBox(
                         height: 8.0,
                       ),
-                      Text(provider.customerProfile.customerContact,style: const TextStyle(
-                        fontSize: 18.0,
-                      ),),
                       SizedBox(
                         height: 30.0,
                       ),
-                      MaterialButton(onPressed: (){
-                        Logout().accountLogout().whenComplete((){
-                          Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(builder: (context) => LoginPage()),
-                                  (Route<dynamic> route) => false);
-                        });
-                      },
+                      MaterialButton(
+                        onPressed: () {
+                          Logout().accountLogout().whenComplete(() {
+                            Navigator.of(context).pushAndRemoveUntil(
+                                MaterialPageRoute(
+                                    builder: (context) => LoginPage()),
+                                (Route<dynamic> route) => false);
+                          });
+                        },
                         color: Colors.grey[700],
-                        child: const Text('Logout', style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.w900,
-                        ),),)
+                        child: const Text(
+                          'Logout',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.w900,
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 ),

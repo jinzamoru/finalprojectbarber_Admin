@@ -1,7 +1,8 @@
+import 'package:finalprojectbarber/screen/admin_screen.dart';
+import 'package:finalprojectbarber/screen/barber_screen.dart';
+import 'package:finalprojectbarber/screen/hair_screen.dart';
 import 'package:finalprojectbarber/screen/home.dart';
 import 'package:finalprojectbarber/screen/profile.dart';
-import 'package:finalprojectbarber/screen/search.dart';
-import 'package:finalprojectbarber/screen/work.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -23,8 +24,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final List<Widget> _pages = [
       BarberDashboard(),
-      UserWork(),
-      UserSearch(),
+      const BarberPage(),
+      AdminPage(),
+      HairPage(),
       UserProfile(),
     ];
 
@@ -40,11 +42,14 @@ class _HomePageState extends State<HomePage> {
             255, 253, 168, 94), // Set the color when item is selected
         unselectedItemColor: const Color.fromARGB(
             255, 197, 197, 197), // Set the color for unselected items
-        items: [
-          const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          const BottomNavigationBarItem(icon: Icon(Icons.work), label: 'Work'),
-          const BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
-          const BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.assignment_ind), label: 'ช่างตัดผม'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.account_box), label: 'ผู้ดูแลระบบ'),
+          BottomNavigationBarItem(icon: Icon(Icons.face), label: 'ทรงผม'),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
         ],
       ),
     );

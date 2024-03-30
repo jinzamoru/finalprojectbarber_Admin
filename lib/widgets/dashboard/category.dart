@@ -1,16 +1,17 @@
+import 'package:finalprojectbarber/model/hair_model.dart';
 import 'package:finalprojectbarber/theme/extention.dart';
 import 'package:finalprojectbarber/widgets/dashboard/category_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../model/barber_model.dart';
-import '../../screen/all_barbers.dart';
+import '../../screen/all_hairs.dart';
 import '../../theme/light_color.dart';
 import '../../theme/text_styles.dart';
 import '../../theme/theme.dart';
 
 
 
-Widget category(List<BarberModel> topBarberList, BuildContext context) {
+Widget category(List<HairModel> topBarberList, BuildContext context) {
   return Column(
     children: <Widget>[
       Padding(
