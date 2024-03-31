@@ -13,17 +13,22 @@ class DataManagerProvider extends ChangeNotifier {
 
   late List<HairModel> allhairs = [];
   late List<AdminInfo> alladmins = [];
- late List<BarberInfo> allbarbers = [];
+  late List<BarberInfo> allbarbers = [];
 
   List<HairModel> searchListhairs = [];
   List<AdminInfo> searchListAdmins = [];
   List<BarberInfo> searchListBarbers = [];
-  
+
   late BarberInfo barberInfo;
 
   late BarberModel barberCompleteData;
 
-  late AdminInfo adminProfile;
+  late AdminInfo adminProfile = AdminInfo(
+      AdminId: '',
+      AdminPassword: '',
+      AdminFirstName: '',
+      AdminLastName: '',
+      AdminEmail: '');
 
   late BarberModel barberProfile;
 
@@ -62,10 +67,11 @@ class DataManagerProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-   void setAllAdmin(List<AdminInfo> adminMapList) {
+  void setAllAdmin(List<AdminInfo> adminMapList) {
     alladmins = adminMapList;
     notifyListeners();
   }
+
   void setAllbarber(List<BarberInfo> barberMapList) {
     allbarbers = barberMapList;
     notifyListeners();
@@ -73,8 +79,8 @@ class DataManagerProvider extends ChangeNotifier {
 
   List<HairModel> get getAllHairs => allhairs;
   List<AdminInfo> get getAllAdmin => alladmins;
- List<BarberInfo> get getAllBarber => allbarbers;
- 
+  List<BarberInfo> get getAllBarber => allbarbers;
+
   void getSearchHair(String searchKey) {
     allhairs.forEach((element) {
       if (element.hairName.toLowerCase().startsWith(searchKey.toLowerCase()) ||
@@ -84,15 +90,17 @@ class DataManagerProvider extends ChangeNotifier {
     });
   }
 
- void getSearchBarber(String searchKey) {
+  void getSearchBarber(String searchKey) {
     allbarbers.forEach((element) {
-      if (element.barberFirstName.toLowerCase()
+      if (element.barberFirstName
+              .toLowerCase()
               .startsWith(searchKey.toLowerCase()) ||
           element.barberFirstName.startsWith(searchKey.toLowerCase())) {
         searchResultBarber(element);
       }
     });
   }
+
   void getSearchAdmin(String searchKey) {
     alladmins.forEach((element) {
       if (element.AdminFirstName.toLowerCase()

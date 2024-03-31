@@ -17,7 +17,7 @@ import '../model/user_model.dart';
 import 'dart:convert';
 
 const server =
-    "https://989a-2403-6200-8837-7557-1004-875-2362-56e7.ngrok-free.app";
+    "https://0c8d-2403-6200-8837-7557-196d-fe84-bd4c-da2.ngrok-free.app";
 Future<bool> loginUser(
     String email, String password, String roll, BuildContext context) async {
   try {
@@ -33,13 +33,11 @@ Future<bool> loginUser(
     if (response.statusCode == 200) {
       final Map<String, dynamic> data = json.decode(response.body);
       if (data['result'] == 1) {
-        if (roll == 'Admin') {
-          await getAdminProfile(email, context).whenComplete(() {
-            Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(builder: (context) => const HomePage()),
-                (Route<dynamic> route) => false);
-          });
-        }
+        await getAdminProfile(email, context).whenComplete(() {
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(builder: (context) => const HomePage()),
+              (Route<dynamic> route) => false);
+        });
         return true;
       } else {
         showErrorDialog(data['message'], context);
@@ -406,6 +404,53 @@ Future<void> updateAdmin(AdminInfo adminModel, BuildContext context) async {
                 TextButton(
                   onPressed: () async {
                     await getAllAdmins(context);
+                    Navigator.popUntil(context, (route) => route.isFirst);
+                  },
+                  child: const Text('ตกลง'),
+                ),
+              ],
+            );
+          },
+        );
+      } else {
+        showErrorDialog(data['message'], context);
+      }
+    } else {
+      showErrorDialog('เชื่อมต่อกับเซิร์ฟเวอร์ล้มเหลว', context);
+    }
+  } catch (e) {
+    showErrorDialog('$e', context);
+  }
+}
+
+Future<void> editProfile(AdminInfo adminModel, BuildContext context) async {
+  try {
+    const url = '$server/user/edit_admin_profile.php';
+    final response = await http.post(
+      Uri.parse(url),
+      body: {
+        'id': adminModel.AdminId,
+        'name': adminModel.AdminFirstName,
+        'lastname': adminModel.AdminLastName,
+        'email': adminModel.AdminEmail,
+        'password': adminModel.AdminPassword,
+      },
+    );
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> data = json.decode(response.body);
+      if (data['result'] == 1) {
+        final Map<String, dynamic> userData = data['data'];
+        String email = userData['email'].toString();
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text('แจ้งเตือน'),
+              content: Text(data['message']),
+              actions: [
+                TextButton(
+                  onPressed: () async {
+                    await getAdminProfile(email, context);
                     Navigator.popUntil(context, (route) => route.isFirst);
                   },
                   child: const Text('ตกลง'),

@@ -11,9 +11,12 @@ class AdminHeader extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
+        const SizedBox(
+          height: 40.0,
+        ),
         Text(
           "ผู้ดูแลระบบ",
-          style:  TextStyles.title,
+          style:  TextStyles.titleM,
         ),
       ],
     ).p16;

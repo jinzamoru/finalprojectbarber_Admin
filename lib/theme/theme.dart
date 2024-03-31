@@ -6,13 +6,13 @@ class AppTheme {
   const AppTheme();
   static ThemeData lightTheme = ThemeData(
     backgroundColor: LightColor.background,
-    primaryColor: LightColor.purple,
-    cardTheme: CardTheme(color: LightColor.background),
-    textTheme:  TextTheme(displayLarge: TextStyle(color: LightColor.black)),
-    iconTheme: IconThemeData(color: LightColor.iconColor),
+    primaryColor: LightColor.orange,
+    cardTheme: const CardTheme(color: LightColor.background),
+    textTheme:  const TextTheme(displayLarge: const TextStyle(color: LightColor.black)),
+    iconTheme: const IconThemeData(color: LightColor.iconColor),
     bottomAppBarColor: LightColor.background,
     dividerColor: LightColor.grey,
-    primaryTextTheme: TextTheme(
+    primaryTextTheme: const TextTheme(
       bodyText1: TextStyle(color:LightColor.titleTextColor)
     )
   );
@@ -28,7 +28,7 @@ class AppTheme {
   static TextStyle h6Style = const TextStyle(fontSize: 14);
 
   static List<BoxShadow> shadow =  <BoxShadow>[
-    BoxShadow(color: Color(0xfff8f8f8), blurRadius: 10, spreadRadius: 15),
+    const BoxShadow(color: Color(0xfff8f8f8), blurRadius: 10, spreadRadius: 15),
   ];
   
   

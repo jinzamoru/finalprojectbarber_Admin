@@ -111,9 +111,8 @@ class _HairPageState extends State<HairPage> {
             MaterialPageRoute(builder: (context) => HairAddDetailScreen()),
           );
         },
-        child: Icon(Icons.add),
-        backgroundColor: Color.fromRGBO(0, 206, 201, 1)
-            , 
+        backgroundColor: Colors.blue,
+        child: const Icon(Icons.add), 
       ),
     );
   }

@@ -67,7 +67,7 @@ class _AdminPageState extends State<AdminPage> {
                           BoxShadow(
                             color: LightColor.grey.withOpacity(.8),
                             blurRadius: 15,
-                            offset: Offset(5, 5),
+                            offset: const Offset(5, 5),
                           )
                         ],
                       ),
@@ -77,14 +77,14 @@ class _AdminPageState extends State<AdminPage> {
                           print(value);
                         },
                         decoration: InputDecoration(
-                          contentPadding: EdgeInsets.symmetric(
+                          contentPadding: const EdgeInsets.symmetric(
                               horizontal: 16, vertical: 16),
                           border: InputBorder.none,
                           hintText: "Search...",
                           hintStyle: TextStyles.body.subTitleColor,
                           suffixIcon: SizedBox(
                             width: 50,
-                            child: Icon(Icons.search, color: LightColor.purple)
+                            child: const Icon(Icons.search, color: LightColor.purple)
                                 .alignCenter
                                 .ripple(
                                   () {},
@@ -110,8 +110,8 @@ class _AdminPageState extends State<AdminPage> {
             MaterialPageRoute(builder: (context) => AdminAddDetailScreen()),
           );
         },
-        child: Icon(Icons.add),
-        backgroundColor: Color.fromRGBO(0, 206, 201, 1),
+        backgroundColor: Colors.blue,
+        child: const Icon(Icons.add),
       ),
     );
   }

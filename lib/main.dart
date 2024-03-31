@@ -73,14 +73,11 @@ class _SplashScreen extends State<SplashScreen> {
       if (!newUser) {
         setState(() {
           loginSuccess = true;
-          roll = login.getString('roll') ?? '';
+          roll = login.getString('roll').toString();
         });
-        loginUser(
-          login.getString('email') ?? '',
-          login.getString('password') ?? '',
-          roll,
-          context,
-        );
+         // ignore: use_build_context_synchronously
+         loginUser(login.getString('email').toString(),
+           login.getString('password').toString(), roll, context);   
       }
     } catch (e) {
       print('Error fetching shared preferences: $e');
@@ -104,11 +101,8 @@ class _SplashScreen extends State<SplashScreen> {
     Timer(const Duration(seconds: 5), () {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (BuildContext context) => loginSuccess
-              ? roll == 'Admin'
-                  ? HomePage()
-                  : HomePage()
-              : LoginPage(),
+          builder: (BuildContext context) =>
+              loginSuccess ? HomePage() : LoginPage(),
         ),
       );
     });
@@ -119,7 +113,7 @@ class _SplashScreen extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       // -------------------- temp background color can be changed.... in THEME DATA
-      backgroundColor: Colors.blueGrey[900],
+      backgroundColor: Colors.orange[200],
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -131,7 +125,7 @@ class _SplashScreen extends State<SplashScreen> {
           ),
           CircularProgressIndicator(
             strokeWidth: 4,
-            backgroundColor: Colors.amberAccent[400],
+            backgroundColor: Colors.blue[200],
           )
         ],
       ),

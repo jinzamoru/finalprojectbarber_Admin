@@ -112,7 +112,7 @@ class _BarberPageState extends State<BarberPage> {
             MaterialPageRoute(builder: (context) => BarberAddDetailScreen()),
           );
         },
-        backgroundColor: const Color.fromRGBO(0, 206, 201, 1),
+        backgroundColor: Colors.blue,
         child: const Icon(Icons.add),
       ),
     );

@@ -11,9 +11,12 @@ class HairHeader extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
+        const SizedBox(
+          height: 40.0,
+        ),
         Text(
           "ทรงผม",
-          style:  TextStyles.title,
+          style:  TextStyles.titleM,
         ),
       ],
     ).p16;

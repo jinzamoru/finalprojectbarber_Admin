@@ -154,14 +154,11 @@ class _UserProfileState extends State<UserProfile> {
                 ],
               ),
             ),
-
             // ข้อมูล
             const SizedBox(height: 20),
             itemProfile('Name', name, Icons.person),
             const SizedBox(height: 10),
             itemProfile('LastName', lastName, Icons.person),
-            const SizedBox(height: 10),
-            itemProfile('Phone', phone, Icons.phone),
             const SizedBox(height: 10),
             itemProfile('Email', email, Icons.mail),
             const SizedBox(

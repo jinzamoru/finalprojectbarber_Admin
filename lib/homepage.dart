@@ -1,8 +1,9 @@
-import 'package:finalprojectbarber/screen/admin_screen.dart';
-import 'package:finalprojectbarber/screen/barber_screen.dart';
-import 'package:finalprojectbarber/screen/hair_screen.dart';
-import 'package:finalprojectbarber/screen/home.dart';
-import 'package:finalprojectbarber/screen/profile.dart';
+import 'package:finalprojectbarber/screen/profile_screen.dart';
+
+import 'screen/admin_screen.dart';
+import 'screen/barber_screen.dart';
+import 'screen/hair_screen.dart';
+import 'screen/home.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -27,7 +28,7 @@ class _HomePageState extends State<HomePage> {
       const BarberPage(),
       AdminPage(),
       HairPage(),
-      UserProfile(),
+      UserProfileScreen(),
     ];
 
     return Scaffold(
@@ -49,7 +50,7 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
               icon: Icon(Icons.account_box), label: 'ผู้ดูแลระบบ'),
           BottomNavigationBarItem(icon: Icon(Icons.face), label: 'ทรงผม'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+          BottomNavigationBarItem(icon: Icon(Icons.person_pin), label: 'โปรไฟล์'),
         ],
       ),
     );

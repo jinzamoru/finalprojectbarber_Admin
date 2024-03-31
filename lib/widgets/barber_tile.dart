@@ -1,6 +1,5 @@
 import 'package:finalprojectbarber/model/barber_model.dart';
 import 'package:finalprojectbarber/theme/extention.dart';
-import 'package:finalprojectbarber/widgets/random_color.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../php_data/php_data.dart';
@@ -34,92 +33,112 @@ Widget barberTile(BarberInfo model, BuildContext context) {
           Expanded(
             child: ListTile(
               contentPadding: const EdgeInsets.all(0),
-              leading: ClipRRect(
-                borderRadius: const BorderRadius.all(Radius.circular(13)),
-                child: Hero(
-                  tag: 'image',
-                  child: Container(
-                    height: 55,
-                    width: 55,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: randomColor(context),
-                    ),
-                  ),
-                ),
-              ),
               title: Text(
                 "${model.barberFirstName} ${model.barberLastName}",
-                style: TextStyles.title.bold
-                    .copyWith(color: Colors.black, fontSize: 16.0),
+                style: TextStyles.titleM.bold
+                    .copyWith(color: Colors.black, fontSize: 18.0),
               ),
               subtitle: Row(
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        model.barberEmail,
-                        style: TextStyles.bodySm.subTitleColor.bold
-                            .copyWith(fontSize: 12.0),
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.email_outlined,
+                            size: 15,
+                            color: Colors.black45,
+                          ),
+                          const SizedBox(width: 4.0),
+                          Text(
+                            model.barberEmail,
+                            style: TextStyles.bodySm.subTitleColor.bold
+                                .copyWith(fontSize: 16.0),
+                          ),
+                        ],
                       ),
-                      const SizedBox(height: 4.0),
-                      Text(
-                        model.barberPhone,
-                        style: TextStyles.bodySm.subTitleColor.bold
-                            .copyWith(fontSize: 12.0),
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.phone_android,
+                            size: 15,
+                            color: Colors.black45,
+                          ),
+                          const SizedBox(width: 4.0),
+                          Text(
+                            model.barberPhone,
+                            style: TextStyles.bodySm.subTitleColor.bold
+                                .copyWith(fontSize: 16.0),
+                          ),
+                        ],
                       ),
-                      const SizedBox(height: 4.0),
                     ],
                   ),
                 ],
               ),
             ),
           ),
-          IconButton(
-            icon: const Icon(
-              Icons.edit,
-              size: 30,
-              color: Colors.blue,
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.blue.shade50,
+              borderRadius: BorderRadius.circular(24),
             ),
-            onPressed: () {
-              Navigator.push(
-                context,
-                CupertinoPageRoute(
-                  builder: (context) => BarberDetailScreen(model: model),
-                ),
-              );
-            },
+            child: IconButton(
+              icon: Icon(
+                Icons.edit_square,
+                size: 25,
+                color: Colors.blue.shade400,
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  CupertinoPageRoute(
+                    builder: (context) => BarberDetailScreen(model: model),
+                  ),
+                );
+              },
+            ),
           ),
-          IconButton(
-            icon: const Icon(
-              Icons.delete,
-              size: 30,
-              color: Colors.red,
+          const SizedBox(
+            width: 5.0,
+          ),
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.red.shade50,
+              borderRadius: BorderRadius.circular(24),
             ),
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: const Text('ลบข้อมูล'),
-                    content: const Text('ต้องการลบข้อมูลนี้หรือไม่?'),
-                    actions: [
-                      TextButton(
-                        onPressed: () => Navigator.pop(context),
-                        child: const Text('ยกเลิก'),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          deleteBarber(model.barberId , model.barberCertificate , context);
-                        },
-                        child: const Text('ลบ'),
-                      ),
-                    ],
-                  );
-                },
-              );
-            },
+            child: IconButton(
+              icon: Icon(
+                Icons.delete,
+                size: 25,
+                color: Colors.red.shade400,
+              ),
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text('ลบข้อมูล'),
+                      content: const Text('ต้องการลบข้อมูลนี้หรือไม่?'),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(context),
+                          child: const Text('ยกเลิก'),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            deleteBarber(model.barberId,
+                                model.barberCertificate, context);
+                          },
+                          child: const Text('ลบ'),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+            ),
           ),
         ],
       ),

@@ -1,4 +1,6 @@
-import 'package:finalprojectbarber/model/hair_model.dart';
+// ignore_for_file: library_private_types_in_public_api
+
+import 'package:finalprojectbarber/model/user_model.dart';
 import 'package:finalprojectbarber/theme/extention.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,32 +11,34 @@ import '../theme/light_color.dart';
 import '../theme/text_styles.dart';
 import '../theme/theme.dart';
 
-class HairDetailScreen extends StatefulWidget {
-  final HairModel model;
+class EditProfileScreen extends StatefulWidget {
+  final AdminInfo model;
 
-  const HairDetailScreen({
+  const EditProfileScreen({
     Key? key,
     required this.model,
   }) : super(key: key);
 
   @override
-  _HairDetailScreenState createState() => _HairDetailScreenState();
+  _EditProfileScreenState createState() => _EditProfileScreenState();
 }
 
-class _HairDetailScreenState extends State<HairDetailScreen> {
-  late HairModel model;
+class _EditProfileScreenState extends State<EditProfileScreen> {
+  late AdminInfo model;
 
+  TextEditingController emailController = TextEditingController();
   TextEditingController nameController = TextEditingController();
-  TextEditingController priceController = TextEditingController();
-
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController lastnameController = TextEditingController();
+  
+  bool showPassword = true;
   @override
   void initState() {
     model = widget.model;
-
     super.initState();
-
-    nameController.text = model.hairName;
-    priceController.text = model.hairPrice.toString();
+    nameController.text = model.AdminFirstName;
+    lastnameController.text = model.AdminLastName;
+    emailController.text = model.AdminEmail;
   }
 
   @override
@@ -81,7 +85,7 @@ class _HairDetailScreenState extends State<HairDetailScreen> {
                             children: <Widget>[
                               Expanded(
                                 child: Text(
-                                  "แก้ไขทรงผม",
+                                  "แก้ไขข้อมูล",
                                   style:
                                       titleStyle.copyWith(color: Colors.black),
                                 ),
@@ -97,29 +101,60 @@ class _HairDetailScreenState extends State<HairDetailScreen> {
                           thickness: .3,
                           color: LightColor.grey,
                         ),
-                        SizedBox(
+                        Container(
                           height: 60,
                           child: TextFormField(
                             controller: nameController,
                             cursorColor: const Color(0xff8471FF),
                             style: const TextStyle(fontSize: 18.0),
                             decoration: kTextFormFieldDecoration.copyWith(
-                              labelText: 'ชื่อทรงผม',
+                              labelText: 'ชื่อ',
                             ),
                           ),
                         ),
                         const SizedBox(
                           width: 20,
                         ),
-                        SizedBox(
+                        Container(
                           height: 60,
                           child: TextFormField(
-                            controller: priceController,
+                            controller: lastnameController,
                             cursorColor: const Color(0xff8471FF),
                             style: const TextStyle(fontSize: 18.0),
                             decoration: kTextFormFieldDecoration.copyWith(
-                              labelText: 'ราคา',
+                              labelText: 'นามสกุล',
                             ),
+                          ),
+                        ),
+                        Container(
+                          height: 60,
+                          child: TextFormField(
+                            controller: emailController,
+                            cursorColor: const Color(0xff8471FF),
+                            style: const TextStyle(fontSize: 18.0),
+                            decoration: kTextFormFieldDecoration.copyWith(
+                              labelText: 'อีเมล',
+                            ),
+                          ),
+                        ),
+                      Container(
+                          height: 60,
+                          child: TextFormField(
+                            controller: passwordController,
+                            cursorColor: const Color(0xff8471FF),
+                            style: const TextStyle(fontSize: 18.0),
+                            obscureText: showPassword,
+                            decoration: kTextFormFieldDecoration.copyWith(
+                                labelText: 'รหัสผ่าน',
+                                suffixIcon: InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        showPassword = !showPassword;
+                                      });
+                                    },
+                                    child: Icon(showPassword
+                                        ? CupertinoIcons.eye
+                                        : CupertinoIcons.eye_slash))),
                           ),
                         ),
                         Container(
@@ -129,14 +164,15 @@ class _HairDetailScreenState extends State<HairDetailScreen> {
                             borderRadius: BorderRadius.circular(10),
                             color: LightColor.grey.withAlpha(150),
                           ),
-                          child: Icon(
+                          child: const Icon(
                             Icons.update,
                             color: Color.fromARGB(255, 2, 158, 255),
                           ),
                         ).ripple(
                           () {
                             if (nameController.text.isEmpty ||
-                                priceController.text.isEmpty) {
+                                lastnameController.text.isEmpty ||
+                                emailController.text.isEmpty) {
                               showDialog(
                                 context: context,
                                 builder: (BuildContext context) {
@@ -154,12 +190,14 @@ class _HairDetailScreenState extends State<HairDetailScreen> {
                                 },
                               );
                             } else {
-                              final hairModel = HairModel(
-                                hairId: model.hairId,
-                                hairName: nameController.text,
-                                hairPrice: int.parse(priceController.text),
+                              final adminModel = AdminInfo(
+                                AdminId: model.AdminId,
+                                AdminFirstName: nameController.text,
+                                AdminLastName: lastnameController.text,
+                                AdminEmail: emailController.text,
+                                AdminPassword: passwordController.text,
                               );
-                              updateHair(hairModel, context);
+                              editProfile(adminModel, context);
                             }
                           },
                           borderRadius: BorderRadius.circular(10),

@@ -112,10 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                           login.setBool('login', false);
                           isLoading = false;
                         });
-                      }
-                       setState(() {
-                        isLoading = false;
-                      });
+                      }         
                     } catch (e) {
                       showDialog(
                         context: context,

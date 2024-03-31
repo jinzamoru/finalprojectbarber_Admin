@@ -6,7 +6,7 @@ final kTextFormFieldDecoration = InputDecoration(
     color: Colors.black,
     fontSize: 17.0,
   ),
-  contentPadding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 15.0),
+  contentPadding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 15.0),
   focusedBorder: OutlineInputBorder(
     borderRadius: BorderRadius.circular(20.0),
     borderSide: const BorderSide(
